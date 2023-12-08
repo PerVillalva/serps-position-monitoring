@@ -1,0 +1,61 @@
+{
+    "actorSpecification": 1,
+    "name": "serp-position-monitoring",
+    "title": "SERPs Position Monitoring",
+    "description": "SERPs Position Monitoring",
+    "version": "0.0",
+    "buildTag": "latest",
+    "meta": {
+        "templateId": "ts-empty"
+    },
+    "storages": {
+        "dataset": {
+            "actorSpecification": 1,
+            "views": {
+                "overview": {
+                    "title": "Overview",
+                    "transformation": {
+                        "fields": [
+                            "keyword",
+                            "paidResults",
+                            "apifyPosition",
+                            "firstPosition",
+                            "secondPosition",
+                            "thirdPosition"
+                        ]
+                    },
+                    "display": {
+                        "component": "table",
+                        "properties": {
+                            "Keyword": {
+                                "label": "keyword",
+                                "format": "text"
+                            },
+                            "Paid Results": {
+                                "label": "paidResults",
+                                "format": "array"
+                            },
+                            "Apify Position": {
+                                "label": "apifyPosition",
+                                "format": "object"
+                            },
+                            "First Position": {
+                                "label": "firstPosition",
+                                "format": "object"
+                            },
+                            "Second Position": {
+                                "label": "secondPosition",
+                                "format": "object"
+                            },
+                            "Third Position": {
+                                "label": "thirdPosition",
+                                "format": "object"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "dockerfile": "./Dockerfile"
+}

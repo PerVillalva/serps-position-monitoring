@@ -1,0 +1,57 @@
+{
+    "title": "SERP Position Monitoring Actor",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "keywords": {
+            "title": "Keywords",
+            "type": "string",
+            "description": "List of keywords to monitor.",
+            "editor": "textarea",
+            "default": "tiktok scraper\ntiktok python scraper\napify tiktok scraper"
+        },
+        "countryCode": {
+            "title": "Country Code",
+            "type": "string",
+            "description": "Code of the country where you want to monitor keywords(e.g, 'us')",
+            "editor": "textfield",
+            "default": "us"
+        },
+        "maxPagesPerQuery": {
+            "title": "Max result pages scraped",
+            "type": "integer",
+            "description": "Define the amount of pages scraped per query.",
+            "minimum": 1,
+            "default": 1
+        },
+        "maxResultsPerPage": {
+            "title": "Max results scraped per page",
+            "type": "integer",
+            "description": "Define the amount of results scraped per page.",
+            "minimum": 1,
+            "default": 10
+        },
+        "slackChannel": {
+            "sectionCaption": "Slack API Configuration",
+            "title": "Slack channel name",
+            "type": "string",
+            "description": "Provide the name of the channel you want your message to be sent to. (e.g., competitor-monitoring)",
+            "editor": "textfield"
+        },
+        "slackBotToken": {
+            "title": "Slack Bot Token",
+            "type": "string",
+            "description": "Provide your Slack App's Bot User OAuth Token (find it under your App's OAuth & Permissions tab)",
+            "editor": "textfield",
+            "isSecret": true
+        },
+        "slackSignInSecret": {
+            "title": "Slack Signin Secret",
+            "type": "string",
+            "description": "Provide your Slack App's Signin Secret (in your App's page, go to Basic information -> App Credentials)",
+            "editor": "textfield",
+            "isSecret": true
+        }
+    },
+    "required": ["keywords"]
+}
