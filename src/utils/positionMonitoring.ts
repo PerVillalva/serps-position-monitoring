@@ -11,7 +11,7 @@ export async function monitorSerpPositionChange(): Promise<string[]> {
     const runConfiguration = currentDataset[0].configuration;
 
     const messages: string[] = [
-        `📑 Report results for page *${runConfiguration.page}*, including *${runConfiguration.resultsPerPage}* results per page for the country *${runConfiguration.country}*\n[View Actor Run](https://console.apify.com/view/runs/${ACTOR_RUN_ID})`,
+        `📑 Report results for page *${runConfiguration.page}*, including *${runConfiguration.resultsPerPage}* results per page for the country *${runConfiguration.country}*\nView Actor Run: https://console.apify.com/view/runs/${ACTOR_RUN_ID}`,
     ];
 
     const keywordMap: Record<string, any[]> = {};
@@ -79,7 +79,7 @@ export async function monitorSerpPositionChange(): Promise<string[]> {
                                 ? `gained ${positionChange} position(s)`
                                 : positionChange < 0
                                 ? `lost ${-positionChange} position(s)`
-                                : `maintained its number ${previousApifySerpPosition} position`;
+                                : `maintained its number *${previousApifySerpPosition}* position`;
                     }
 
                     messages.push(
