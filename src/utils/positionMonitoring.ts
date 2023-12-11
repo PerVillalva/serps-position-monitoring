@@ -35,7 +35,8 @@ export async function monitorSerpPositionChange(): Promise<string[]> {
             if (matchingKeywordObjs && matchingKeywordObjs.length > 0) {
                 const { keyword } = previousData;
                 const prevApifySerpData = previousData.apifyPosition;
-                const currApifySerpData = matchingKeywordObjs[0].apifyPosition; // Use the first matching object
+                const currApifySerpData = matchingKeywordObjs[0].apifyPosition;
+                const totalApifyResults = matchingKeywordObjs[0].apifyResults;
                 const currPaidAdsData = matchingKeywordObjs[0].paidResults;
 
                 let previousApifySerpPosition: number | string;
@@ -82,7 +83,7 @@ export async function monitorSerpPositionChange(): Promise<string[]> {
                     }
 
                     messages.push(
-                        `Keyword: *${keyword}*\nPaid Results: *${currPaidAdsData.length}*\nApify Position Change: ${positionChangeText}\nApify Previous Position: *${previousApifySerpPosition}*\nApify Current Position: *${currentApifySerpPosition}*`
+                        `Keyword: *${keyword}*\nPaid Results: *${currPaidAdsData.length}*\nApify Position Change: ${positionChangeText}\nApify Previous Position: *${previousApifySerpPosition}*\nApify Current Position: *${currentApifySerpPosition}*\nTotal Apify Results: *${totalApifyResults.length}*`
                     );
                 }
             }

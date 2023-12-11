@@ -84,6 +84,7 @@ export async function filteredSerpActorOutput(
                 apifyPositionData.length > 0
                     ? apifyPositionData[0]
                     : 'Not listed',
+            apifyResults: apifyPositionData,
         });
     }
 }

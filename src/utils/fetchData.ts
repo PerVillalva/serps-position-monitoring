@@ -35,9 +35,9 @@ export async function fetchCurrentDatasetItems() {
 
 export async function checkTaskRunNumber() {
     const task = await axios.get(
-        `https://api.apify.com/v2/actor-tasks/${ACTOR_TASK_ID}?token=${APIFY_TOKEN}`
+        `https://api.apify.com/v2/actor-tasks/${ACTOR_TASK_ID}/runs?token=${APIFY_TOKEN}&status=SUCCEEDED`
     );
     const taskData = task.data.data;
-    const taskRuns = taskData.stats.totalRuns;
+    const taskRuns = taskData.total;
     return taskRuns;
 }
