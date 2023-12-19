@@ -61,7 +61,7 @@ export async function monitorSerpPositionChange(): Promise<string[]> {
                         isNaN(Number(currentApifySerpPosition)))
                 ) {
                     messages.push(
-                        `Apify is not raking for the keyword *${keyword}*`
+                        `Apify is not ranking for the keyword *${keyword}*`
                     );
                 } else {
                     let positionChangeText: string;

@@ -29,5 +29,5 @@ export async function postSlackMessage(
         text: fMessage,
     });
 
-    log.info('📤 Competitor activity report sent to Slack.');
+    log.info('📤 SERPs position report sent to Slack.');
 }
