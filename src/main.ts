@@ -46,7 +46,6 @@ await filteredSerpActorOutput(
 
 // Call the monitorSerpPositionChange function if this is Actor's second run or +
 const numberOfRuns = await checkTaskRunNumber();
-console.log(numberOfRuns);
 if (numberOfRuns >= 1) {
     const messages = await monitorSerpPositionChange();
 
