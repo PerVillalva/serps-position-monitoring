@@ -3,16 +3,13 @@ import {
     fetchPreviousDatasetItems,
 } from './fetchData.js';
 
-const { ACTOR_RUN_ID } = process.env;
-
-export async function monitorSerpPositionChange(): Promise<string[]> {
+export async function monitorSerpPositionChange() {
     const previousDataset = await fetchPreviousDatasetItems();
     const currentDataset = await fetchCurrentDatasetItems();
     const runConfiguration = currentDataset[0].configuration;
 
-    const messages: string[] = [
-        `📑 Report results for page *${runConfiguration.page}*, including *${runConfiguration.resultsPerPage}* results per page for the country *${runConfiguration.country}*\nView Actor Run: https://console.apify.com/view/runs/${ACTOR_RUN_ID}`,
-    ];
+    const headerMessage: string = `⚙️ *Actor configuration*\n*Page:* \`${runConfiguration.page}\`\n*Results/page:* \`${runConfiguration.resultsPerPage}\`\n*Country:* \`${runConfiguration.country}\``;
+    const keywordMessages: string[] = [];
 
     const keywordMap: Record<string, any[]> = {};
 
@@ -60,35 +57,35 @@ export async function monitorSerpPositionChange(): Promise<string[]> {
                     (isNaN(Number(previousApifySerpPosition)) &&
                         isNaN(Number(currentApifySerpPosition)))
                 ) {
-                    messages.push(
-                        `Apify is not ranking for the keyword *${keyword}*`
+                    keywordMessages.push(
+                        `😔 Apify is not ranking for the keyword \`${keyword}\``
                     );
                 } else {
                     let positionChangeText: string;
 
                     if (typeof previousApifySerpPosition !== 'number') {
-                        positionChangeText = `started ranking at position *${currentApifySerpPosition}*`;
+                        positionChangeText = `🚀 Started ranking at position \`${currentApifySerpPosition}\``;
                     } else if (typeof currentApifySerpPosition !== 'number') {
-                        positionChangeText = `stopped ranking at position *${previousApifySerpPosition}*`;
+                        positionChangeText = `🛑 Stopped ranking at position \`${previousApifySerpPosition}\``;
                     } else {
                         const positionChange: number =
                             Number(previousApifySerpPosition) -
                             Number(currentApifySerpPosition);
                         positionChangeText =
                             positionChange > 0
-                                ? `gained ${positionChange} position(s)`
+                                ? `:green_arrow_up:\`${positionChange}\``
                                 : positionChange < 0
-                                ? `lost ${-positionChange} position(s)`
-                                : `maintained its number *${previousApifySerpPosition}* position`;
+                                ? `:red_arrow_down:\`${-positionChange}\``
+                                : `🛡️ Maintained its number \`${previousApifySerpPosition}\` position`;
                     }
 
-                    messages.push(
-                        `Keyword: *${keyword}*\nPaid Results: *${currPaidAdsData.length}*\nApify Position Change: ${positionChangeText}\nApify Previous Position: *${previousApifySerpPosition}*\nApify Current Position: *${currentApifySerpPosition}*\nTotal Apify Results: *${totalApifyResults.length}*`
+                    keywordMessages.push(
+                        `*Keyword:* \`${keyword}\`\n*Paid Results:* \`${currPaidAdsData.length}\`\n*Apify Position Change:* ${positionChangeText}\n*Apify Previous Position:* \`${previousApifySerpPosition}\`\n*Apify Current Position:* \`${currentApifySerpPosition}\`\n*Total Apify Results:* \`${totalApifyResults.length}\``
                     );
                 }
             }
         }
     );
 
-    return messages;
+    return { headerMessage, keywordMessages };
 }

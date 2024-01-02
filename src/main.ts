@@ -47,10 +47,12 @@ await filteredSerpActorOutput(
 // Call the monitorSerpPositionChange function if this is Actor's second run or +
 const numberOfRuns = await checkTaskRunNumber();
 if (numberOfRuns >= 1) {
-    const messages = await monitorSerpPositionChange();
+    const { headerMessage, keywordMessages } =
+        await monitorSerpPositionChange();
 
     await postSlackMessage(
-        messages,
+        headerMessage,
+        keywordMessages,
         slackSignInSecret,
         slackBotToken,
         slackChannel
