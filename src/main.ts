@@ -56,6 +56,8 @@ const notion = notionClient(notionToken);
 if (useDatabaseData) {
     const databaseKeywords = await fetchAllKeywords(notion, keywordDatabaseID);
 
+    console.log(databaseKeywords.values());
+
     const keywordsArray = Array.from(databaseKeywords.keys());
 
     const keywordsStringInput = keywordsArray.join('\n');
@@ -99,9 +101,11 @@ if (slackSignInSecret) {
 // If notionToken is provided, create new items in the SERP Notion Database.
 if (notionToken) {
     const datasetItems = await fetchCurrentDatasetItems();
+    const keywordMap = await fetchAllKeywords(notion, keywordDatabaseID);
+
     for (let result of datasetItems) {
         const { apifyPosition, keyword } = result;
-        await createItemInDatabase(notion, serpDatabaseID, keywordDatabaseID, {
+        await createItemInDatabase(notion, serpDatabaseID, keywordMap, {
             apifyPosition,
             keyword,
         });

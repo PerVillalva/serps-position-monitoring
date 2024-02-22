@@ -62,7 +62,7 @@ export const fetchAllKeywords = async (notionClient: Client, keywordDatabaseId: 
 export const createItemInDatabase = async (
     notionClient: Client,
     serpDatabaseID: string,
-    keywordDatabaseId: string,
+    keywordMap: Map<string, string>,
     {
         apifyPosition,
         keyword,
@@ -72,10 +72,6 @@ export const createItemInDatabase = async (
     const position = apifyPosition?.position?.toString() || 'Not listed';
     const url = apifyPosition?.url || 'n/a';
 
-    const keywordMap = await fetchAllKeywords(
-        notionClient,
-        keywordDatabaseId,
-    );
     const keywordId = keywordMap.get(keyword);
 
     if (!keywordId) return null;
