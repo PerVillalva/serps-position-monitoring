@@ -29,7 +29,7 @@
             "type": "integer",
             "description": "Define the amount of results scraped per page.",
             "minimum": 1,
-            "default": 10
+            "default": 100
         },
         "slackChannel": {
             "sectionCaption": "Slack API Configuration",
@@ -51,7 +51,33 @@
             "description": "Provide your Slack App's Signin Secret (in your App's page, go to Basic information -> App Credentials)",
             "editor": "textfield",
             "isSecret": true
+        },
+        "notionToken": {
+            "sectionCaption": "Notion API Configuration",
+            "title": "Notion API Token",
+            "type": "string",
+            "description": "Provide your Notion's Integration Token",
+            "editor": "textfield",
+            "isSecret": true
+        },
+        "keywordDatabaseID": {
+            "title": "Keywords Database ID",
+            "type": "string",
+            "description": "The ID of the Keyword Notion Database you want to use as the 'data source'.",
+            "editor": "textfield"
+        },
+        "serpDatabaseID": {
+            "title": "SERP Database ID",
+            "type": "string",
+            "description": "The ID of the SERP Notion Database you want to use as the 'data target'.",
+            "editor": "textfield"
+        },
+        "useDatabaseData": {
+            "title": "Use database data as input",
+            "type": "boolean",
+            "description": "Use database keywords data as Actor input.",
+            "default": true
         }
     },
-    "required": ["keywords"]
+    "required": []
 }
